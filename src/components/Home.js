@@ -19,8 +19,12 @@ function Home() {
       <img src={img1} style={{filter:"brightness(60%)",width:"100%"}} alt="..."/>
     </div>
     <div className="carousel-item">
+    <div className='carousel-caption'>
+      <h1>hello</h1>
+    </div>
       <img src="https://kids.earth.org/wp-content/uploads/2022/04/Untitled-1024-%C3%97-768px-17-900x675.jpg" className="d-block  h-5" style={{filter:"brightness(60%)",width:"35%"}} alt="..."/>
     </div>
+    
     <div className="carousel-item">
       <img src="https://www.thestatesman.com/wp-content/uploads/2019/03/Farm-India.jpg"  style={{filter:"brightness(30%)",width:"35%"}} className="d-block h-5" alt="..."/>
     </div>

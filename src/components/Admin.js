@@ -5,8 +5,7 @@ import { FaRegEye } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-function LoginFarmer() {
-
+function Admin() {
     let {register,handleSubmit,formState:{errors},watch}=useForm()
     let navigate=useNavigate();
     const [showpassword,setshowpassword]=useState(false)
@@ -17,11 +16,12 @@ function LoginFarmer() {
     let [userloginstatus,setuserloginstatus]=useState(false)
     const handlesubmituser=(data)=>{
         console.log(data)
+        navigate('./pageforadmin')
         axios.post('http://localhost:3500/api/login',data)
         .then((res)=>{
             if(res.data.message==="successlogin"){
                 //navigate to userprofile
-                navigate('/registering')
+                navigate('/pageforadmin')
                 // console.log(userloginstatus)
                  setuserloginstatus(true)
                 console.log(userloginstatus)
@@ -39,8 +39,6 @@ function LoginFarmer() {
         console.log(err)
         }
         )
-
-
     }
      
     
@@ -49,14 +47,17 @@ function LoginFarmer() {
     const password=watch("password")
     return (
         <div>
-            <h1 className='text-center display-3 text-success'>Farmer Login Page</h1>
+            <h1 className='text-center display-3 text-success'>Admin Login Page</h1>
             <div className="row">
                 <div className="col-11 col-sm-8 col-md-6 mx-auto">
             <form onSubmit={handleSubmit(handlesubmituser)}>
-                <label htmlFor="contact" className='mt-3' >Mobile number</label>
-               <input type="text" name="contact" id="contact" placeholder='Enter mobile-number' className='form-control mt-1' {...register("contact",{required:"*Mobile number is required"})}/>
+                <label htmlFor="email" className='mt-3' >Email-id</label>
+               <input type="text" name="email" id="email" placeholder="Enter Admin's email-id" className='form-control mt-1' {...register("email",{required:"*Email-id is required",pattern: { 
+                value:'@gmail.com',
+                message: "*Valid email is required"
+               }})}/>
                {
-                errors.contact && <h6 className='text-danger'>{errors.contact.message}</h6>
+                errors.email && <h6 className='text-danger'>{errors.email.message}</h6>
                }
 
             <label htmlFor="password" className='mt-3' >Enter your Password</label>
@@ -81,4 +82,4 @@ function LoginFarmer() {
     )
 
 }
-export default LoginFarmer
+export default Admin

@@ -8,9 +8,35 @@ function SignUp() {
     let navigate=useNavigate()
     let {register,handleSubmit,formState:{errors},watch}=useForm()
     let saveuserdetails=(data)=>{
-        console.log(data)
+        axios.post('/register',data)
+        .then((res)=>{
+            if(res.status===201){
+                seterrors("")
+                navigate("/login")
+            }
+            else{
+                    seterrors(res.data.message)
+                }
+            
+            })
+            .catch((errorobj)=>{
+               console.log(errorobj)
+                //(4xx,5xx)
+                if(errorobj.response){
+                    
+                        seterrors(errorobj.message)
+                }//network error(request is there no response)
+                else if(errorobj.request){
+                   
+                    seterrors(errorobj.message)
+                }
+                //syntax errors
+                else{
+                    seterrors(errorobj.message)
+                }
+     })
     }
-    const [showpassword,setshowpassword]=useState(false)
+      const [showpassword,setshowpassword]=useState(false)
     const [showrepassword,setshowrepassword]=useState(false)
     let showrepass=()=>{
         setshowrepassword(!showrepassword)

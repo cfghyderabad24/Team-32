@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { FaEyeSlash } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function LoginFarmer() {
     let {register,handleSubmit,formState:{errors},watch}=useForm()
@@ -11,9 +12,33 @@ function LoginFarmer() {
     let showpass=()=>{
         setshowpassword(!showpassword)
     }
+    let [error,setloginerr]=useState("")
+    let [userloginstatus,setuserloginstatus]=useState(false)
     const handlesubmituser=(data)=>{
         console.log(data)
         navigate('./registering')
+        axios.post('http://localhost:3500/api/login',data)
+        .then((res)=>{
+            if(res.data.message==="successlogin"){
+                //navigate to userprofile
+                navigate('/registering')
+                // console.log(userloginstatus)
+                 setuserloginstatus(true)
+                console.log(userloginstatus)
+             
+                console.log(res.data.token)
+                localStorage.setItem("token",res.data.token)
+            }
+            else{
+                setloginerr(res.data.message)
+            }
+        })
+        .catch((err)=>
+       { 
+        setloginerr(err)
+        console.log(err)
+        }
+        )
     }
      
     

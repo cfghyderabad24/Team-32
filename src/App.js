@@ -10,6 +10,8 @@ import LoginFarmer from './components/LoginFarmer';
 import LoginVolunteer from './components/LoginVolunteer';
 import SignUp from './components/SignUp';
 import Feedback from './components/Feedback';
+import Admin from './components/Admin';
+import Pageforadmin from './components/Pageforadmin';
 
 import Home from './components/Home';
 function App() {
@@ -23,6 +25,10 @@ function App() {
           {
             path:'/',
             element:<Home/>
+          },
+          {
+            path:'/admin',
+            element:<Admin/>
           },
           {
             path:'/loginfarmer',

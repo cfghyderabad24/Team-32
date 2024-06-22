@@ -8,7 +8,7 @@ function RootLayout() {
   return (
     <div>
       <NavBar/>
-      <div>
+      <div style={{maxHeight:"700px"}}>
         <Outlet/>
       </div>
       <Footer/>

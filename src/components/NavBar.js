@@ -14,13 +14,13 @@ function NavBar() {
   }
   return (
     <div>
-      <nav className="navbar navbar-expand-sm navbar-light navbarnavigation" >
+      <nav className="navbar navbar-expand-sm navbar-light navbarnavigation " >
         <div className="container-fluid">
           <a className="navbar-brand  text-white"><img src="https://cdn2.vectorstock.com/i/1000x1000/92/86/agriculture-farming-logo-vector-26039286.jpg" width="50px" alt="" /></a>
           <button data-bs-target="#navbarcontent" data-bs-toggle="collapse" class="navbar-toggler" >
             <span className='navbar-toggler-icon'></span>
           </button>
-          <div className="collapse navbar-collapse justify-content-center " id="navbarcontent">
+          <div className="collapse navbar-collapse justify-content-end " id="navbarcontent">
 
             <ul className="navbar-nav">
               
@@ -45,6 +45,11 @@ function NavBar() {
                       <NavLink className="dropdown-item" to="/loginvolunteer" style={({ isActive }) => {
                         return isActive ? isactivelink : isinactivelink;
                       }}>Volunteer Login</NavLink>
+                    </li>
+                    <li>
+                      <NavLink className="dropdown-item" to="/admin" style={({ isActive }) => {
+                        return isActive ? isactivelink : isinactivelink;
+                      }}>Admin Login</NavLink>
                     </li>
                   </ul>
                 </li>
