@@ -1,0 +1,30 @@
+.notifications-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .notification-box {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .notification {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #e0e0e0;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  
+  .notification h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }

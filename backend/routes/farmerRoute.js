@@ -12,6 +12,22 @@ router.post('/farmers', async (req, res) => {
         res.status(400).send(error);
     }
 });
+
+router.get('/farmers/:contactNumber', async (req, res) => {
+  const contactNumber = req.params.contactNumber;
+
+  try {
+    const farmer = await Farmer.findOne({ contactNumber: contactNumber });
+
+    if (!farmer) {
+      return res.status(404).send({ error: 'Farmer not found' });
+    }
+
+    res.status(200).send(farmer);
+  } catch (error) {
+    res.status(500).send({ error: 'Internal Server Error.' });
+  }
+});
 // Create a new soil analysis record
 router.post('/soil-analysis', async (req, res) => {
     try {
