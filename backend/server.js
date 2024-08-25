@@ -1,5 +1,6 @@
 const express = require('express');
 const cron= require('node-cron');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const { fetchWeather } = require('./services/weatherservice');
@@ -16,6 +17,7 @@ const dbConfig= require('./config/dbConfig');
 const app = express();
 // to destructure json format sent by login, signup
 app.use(express.json())
+app.use(cors());
 //if api req is coming with api/user go and search in userRoute
 app.use('/api/user', require('./routes/UserRoute'))
 app.use('/api/farmer', require('./routes/farmerRoute'))
@@ -51,7 +53,7 @@ app.get('/api/weather', async (req, res) => {
 });
 
 // Schedule a job to run every 12 hours
-cron.schedule('*/5 * * * * *', async () => {
+cron.schedule('0 * * * *', async () => {
   console.log('Running scheduled weather check...');
   try {
     const locations = await getDistinctLocations();

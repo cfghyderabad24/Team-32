@@ -17,9 +17,11 @@ function LoginFarmer() {
     let [userloginstatus,setuserloginstatus]=useState(false)
     const handlesubmituser=(data)=>{
         console.log(data)
-        axios.post('http://localhost:5000/api/user/login',data)
+        try{
+        axios.post('http://127.0.0.1:5000/api/user/login',data)
         .then((res)=>{
-            if(res.data.message==="successlogin"){
+
+            if(res.status===200){
                 //navigate to userprofile
                 navigate('/')
                 // console.log(userloginstatus)
@@ -30,7 +32,9 @@ function LoginFarmer() {
                 localStorage.setItem("token",res.data.token)
             }
             else{
+                console.log(res.data.message)
                 setloginerr(res.data.message)
+                
             }
         })
         .catch((err)=>
@@ -39,7 +43,10 @@ function LoginFarmer() {
         console.log(err)
         }
         )
-
+    }
+    catch (error){
+        console.log(error);
+    }
 
     }
      

@@ -9,7 +9,7 @@ connection.on('connected',()=>
 
 connection.on('error',()=>
 {
-    console.log("Errot",error);
+    console.log("ErroR");
 })
 
 module.exports=mongoose;

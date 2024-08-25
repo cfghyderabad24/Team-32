@@ -5,7 +5,7 @@ const id = process.env.id;
 const token = process.env.token;
 const client = twilio(id, token);
 
-async function sendMessage(messageBody, toNumber, fromNumber = 'whatsapp:+14155238886') {
+async function sendMessage(messageBody, toNumber, fromNumber = 'whatsapp:+16193199887') {
   try {
     // Translate the text (assuming this is async and returns a promise)
     const translatedMessage = await translate(messageBody, { to: 'te' });
@@ -13,7 +13,7 @@ async function sendMessage(messageBody, toNumber, fromNumber = 'whatsapp:+141552
     const message = await client.messages.create({ 
         body: translatedMessage, // Message to be sent 
         from: 'whatsapp:+14155238886', // Sender's Number (Twilio Sandbox No.) 
-        to: `whatsapp:${toNumber}` // Number receiving the message 
+        to: `whatsapp:+919390038746` // Number receiving the message 
     });
 
 

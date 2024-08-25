@@ -30,6 +30,7 @@ async (req, res) => {
 
             name: req.body.name,
             password: secPassword,
+            salt : salt,
             email:req.body.email,
             
         }).then(res.json({success:true}) )
@@ -47,25 +48,48 @@ async (req, res) => {
 
 router.post("/login", async (req, res) => {
     const errors = validationResult(req);
+    console.log("Request received for Login")
     if (!errors.isEmpty()) {
+        console.log("Found Errors")
         return res.status(400).json({ errors: errors.array() });
+    }
+    else{
+        console.log("No error found")
     }
 
     try {
-        const { email, password } = req.body;
+        console.log(req.body)
+        const email= req.body.contact;
+        const password=req.body.password;
+        console.log(email)
 
         // Find user by email
         let user = await User.findOne({ email });
+        console.log(user)
 
         // Check if user exists
         if (!user) {
             return res.status(400).json({ errors: "User not found" });
         }
-        const pwdComapare=await bcrypt.compare(req.body.password,user.password )
+        const salt= user.salt
+        //hash with salt
+        let secPassword=await bcrypt.hash(req.body.password,salt)
+        console.log(secPassword)
+        const Password_val = String(secPassword)
+        if( Password_val == secPassword){
+            pwdCompare =true
+        }
+        else{
+            pwdCompare = false
+        }
 
         // Check if password matches--hashed password with entered password
-        if (!pwdComapare) {
+        if (!pwdCompare) {
+            console.log('Password wrong')
             return res.status(400).json({ errors: "Incorrect password" });
+        }
+        else{
+            console.log("Password is Correct")
         }
         const data=
         {
@@ -81,7 +105,7 @@ router.post("/login", async (req, res) => {
         expiresIn:"1d"
         })
         // If credentials are valid, return success
-        return res.json({ success: true ,authToken: authToken});
+        return res.status(200).json({ success: true ,authToken: authToken});
 
     } catch (err) {
         console.error(err);

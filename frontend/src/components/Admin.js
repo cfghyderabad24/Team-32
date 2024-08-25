@@ -17,9 +17,9 @@ function Admin() {
     const handlesubmituser=(data)=>{
         console.log(data)
         navigate('./pageforadmin')
-        axios.post('http://localhost:3500/api/user/login',data)
+        axios.post('http://127.0.0.1:5000/api/user/login',data)
         .then((res)=>{
-            if(res.data.message==="successlogin"){
+            if(res.status===200){
                 //navigate to userprofile
                 navigate('/pageforadmin')
                 // console.log(userloginstatus)
@@ -52,7 +52,7 @@ function Admin() {
                 <div className="col-11 col-sm-8 col-md-6 mx-auto">
             <form onSubmit={handleSubmit(handlesubmituser)}>
                 <label htmlFor="email" className='mt-3' >Email-id</label>
-               <input type="text" name="email" id="email" placeholder="Enter Admin's email-id" className='form-control mt-1' {...register("email",{required:"*Email-id is required",pattern: { 
+               <input type="text" name="email" id="email" placeholder="Enter Admin's email-id" className='form-control mt-1' {...register("contact",{required:"*Email-id is required",pattern: { 
                 value:'@gmail.com',
                 message: "*Valid email is required"
                }})}/>

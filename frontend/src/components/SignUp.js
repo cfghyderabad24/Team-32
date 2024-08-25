@@ -13,7 +13,8 @@ function SignUp() {
 
     const saveUserDetails = (data) => {
         console.log("signup data:", data);
-        axios.post('http://localhost:5000/api/user/register', data)
+        try{
+        axios.post('http://127.0.0.1:5000/api/user/register', data)
             .then((res) => {
                 if (res.status === 200) {
                     setErrors('');
@@ -31,6 +32,12 @@ function SignUp() {
                     setErrors("Error in request: " + error.message);
                 }
             });
+            console.log("User logged in successfully")
+        }
+        catch (error) {
+                // Code to handle the error
+                console.error('An error occurred:', error);
+              }
     };
 
     const togglePasswordVisibility = () => {
